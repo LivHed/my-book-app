@@ -23,3 +23,10 @@
   margin: 10px;
   font-size: 18px;
 }
+
+.OneBook {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
