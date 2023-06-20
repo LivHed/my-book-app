@@ -1,3 +1,25 @@
 .App {
   text-align: center;
 }
+
+.Select {
+  margin: 15px;
+  padding: 10px;
+}
+
+.Books {
+  width: 50%;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  margin: 20px;
+}
+
+.BookInfo {
+  margin: 15px;
+}
+
+.NavbarItem {
+  margin: 10px;
+  font-size: 18px;
+}
