@@ -23,8 +23,8 @@ function Home() {
 
     const navigate = useNavigate();
 
-    const handleClick = () => {
-        navigate('/book');
+    const handleClick = (id: string) => {
+        navigate('/book/' + id);
     };
 
     const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -42,22 +42,24 @@ function Home() {
 
     return (
         <>
-            <h1>Homepage</h1>
-            <select onChange={onChange} className='Select'>
-                <option about='asdf' value='name'>Name</option>
-                <option value='haveRead'>Have read</option>
-                <option value='currentlyReading'>Currently reading</option>
-                <option value='wantToRead'>Want to read</option>
-            </select>
+            <h1>All books</h1>
+            <label> Sort books
+                <select onChange={onChange} className='Select'>
+                    <option about='name' value='name'>Name</option>
+                    <option value='haveRead'>Have read</option>
+                    <option value='currentlyReading'>Currently reading</option>
+                    <option value='wantToRead'>Want to read</option>
+                </select>
+            </label>
 
             {books.length > 0 ? books.map((book: Book, index: number) =>
-                <div key={index} onClick={handleClick}>
+                <div key={index} onClick={() => handleClick(book.id)} className='Books'>
                     <img src={book.coverUrl}></img>
-                    <div>Name: {book.name}</div>
-                    <div>Genre: {book.genre}</div>
+                    <div className='BookInfo'>Name: {book.name}</div>
+                    <div className='BookInfo'>Genre: {book.genre}</div>
                 </div>
             )
-                : (<Loader />)}
+                : <div>(<Loader />)</div>}
         </>
     );
 }
