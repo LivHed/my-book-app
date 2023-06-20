@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Loader from '../components/Loader'
-import Book from './Book'
 import { useNavigate } from 'react-router-dom';
 
-interface Book {
+export interface IBook {
     id: string,
     name: string,
     genre: string,
@@ -17,7 +16,7 @@ interface Book {
 }
 
 function Home() {
-    const [books, setBooks] = useState<Book[]>([])
+    const [books, setBooks] = useState<IBook[]>([])
     const [error, setError] = useState({})
     const [sorting, setSorting] = useState("name")
 
@@ -52,16 +51,17 @@ function Home() {
                 </select>
             </label>
 
-            {books.length > 0 ? books.map((book: Book, index: number) =>
+            {books.length > 0 ? books.map((book: IBook, index: number) =>
                 <div key={index} onClick={() => handleClick(book.id)} className='Books'>
                     <img src={book.coverUrl}></img>
                     <div className='BookInfo'>Name: {book.name}</div>
                     <div className='BookInfo'>Genre: {book.genre}</div>
                 </div>
             )
-                : <div>(<Loader />)</div>}
+                : <div>(<Loader />)</div>
+            }
         </>
-    );
+    )
 }
 
 export default Home;
