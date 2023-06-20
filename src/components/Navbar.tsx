@@ -6,9 +6,9 @@ const NavBar = () => {
     return (
         <Navbar sticky="top" expand="md">
             <Container>
-                <Nav className="me-auto">
-                    <Link to="/">Home</Link>
-                    <Link to="/book">Book</Link>
+                <Nav>
+                    <Link className='NavbarItem' to="/">Home</Link>
+                    <Link className='NavbarItem' to="/book/:id">Book</Link>
                 </Nav>
             </Container>
         </Navbar>
