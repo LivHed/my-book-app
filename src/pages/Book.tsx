@@ -10,25 +10,24 @@ const Book = () => {
     let { id } = useParams();
 
     useEffect(() => {
-        fetch('https://devies-reads-be.onrender.com/books/' + id)
+        fetch('https://freetestapi.com/api/v1/books/1' + id)
             .then(response => response.json())
             .then(res => setOneBook(res))
             .catch(err => setError(err))
     }, [])
 
+    //ändra till de filtreringarna som finns i dokumentationen
     return (
         <>
             <h1>More info about this book: </h1>
             {oneBook != null ?
                 <div className='OneBook'>
-                    <img src={oneBook.coverUrl}></img>
-                    <div className='BookInfo'>Name: {oneBook.name}</div>
+                    <img src={oneBook.cover_image} alt="Book cover"></img>
+                    <div className='BookInfo'>Title: {oneBook.title}</div>
+                    <div className='BookInfo'>Author: {oneBook.author}</div>
+                    <div className='BookInfo'>Publication year: {oneBook.publication_year}</div> 
                     <div className='BookInfo'>Genre: {oneBook.genre}</div>
                     <div className='BookInfo'>Description: {oneBook.description}</div>
-                    <div className='BookInfo'>Average rating: {oneBook.averageRating}</div>
-                    <div className='BookInfo'>Have read: {oneBook.haveRead}</div>
-                    <div className='BookInfo'>Currently reading: {oneBook.currentlyReading}</div>
-                    <div className='BookInfo'>Want to read: {oneBook.wantToRead}</div>
                 </div>
                 : <div>(<Loader />)</div>}
         </>

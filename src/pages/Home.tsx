@@ -3,26 +3,23 @@ import Loader from '../components/Loader'
 import { useNavigate } from 'react-router-dom';
 
 export interface IBook {
-    id: string,
-    name: string,
-    genre: string,
-    coverUrl: string,
+    id: number,
+    title: string,
+    author: string,
+    publication_year: number,
+    genre: [],
     description: string,
-    averageRating: number,
-    haveRead: number,
-    currentlyReading: number,
-    wantToRead: number,
-    userRating: number
+    cover_image: string,
 }
 
 function Home() {
     const [books, setBooks] = useState<IBook[]>([])
     const [error, setError] = useState({})
-    const [sorting, setSorting] = useState("name")
+    const [sorting, setSorting] = useState("title")
 
     const navigate = useNavigate();
 
-    const handleClick = (id: string) => {
+    const handleClick = (id: number) => {
         navigate('/book/' + id);
     };
 
@@ -32,7 +29,7 @@ function Home() {
     }
 
     useEffect(() => {
-        fetch('https://devies-reads-be.onrender.com/books?' + new URLSearchParams(
+        fetch('https://freetestapi.com/api/v1/books?' + new URLSearchParams(
             { sortBy: sorting }))
             .then(response => response.json())
             .then(res => setBooks(res))
@@ -44,17 +41,17 @@ function Home() {
             <h1>All books</h1>
             <label> Sort books
                 <select onChange={onChange} className='Select'>
-                    <option about='name' value='name'>Name</option>
-                    <option value='haveRead'>Have read</option>
-                    <option value='currentlyReading'>Currently reading</option>
-                    <option value='wantToRead'>Want to read</option>
+                    <option about='title' value='title'>Title</option>
+                    <option value='author'>Author</option>
+                    <option value='publication_year'>Publication year</option>
+                    <option value='genre'>Genre</option>
                 </select>
             </label>
 
             {books.length > 0 ? books.map((book: IBook, index: number) =>
                 <div key={index} onClick={() => handleClick(book.id)} className='Books'>
-                    <img src={book.coverUrl}></img>
-                    <div className='BookInfo'>Name: {book.name}</div>
+                    <img src={book.cover_image} alt="Book cover"></img>
+                    <div className='BookInfo'>Name: {book.title}</div>
                     <div className='BookInfo'>Genre: {book.genre}</div>
                 </div>
             )
